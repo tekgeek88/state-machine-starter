@@ -1,0 +1,28 @@
+# This is a TOML document.
+# For information on TOML documents and how to write them visit
+# https://en.wikipedia.org/wiki/TOML
+# https://github.com/toml-lang/toml
+
+# Log config
+app_log_path = './logs'
+app_log_filename = 'app.log'
+
+
+[loggers]
+    # Available options:
+    # level: 'CRITICAL', 'FATAL', 'ERROR', 'WARN', 'WARNING', 'INFO', 'DEBUG'
+    # format: https://docs.python.org/3/howto/logging.html#formatters
+    # when: second (s), minute (m), hour (h), day (d)
+    [loggers.console]
+        level = 'DEBUG'
+        format = '%(levelname)s - %(module)s - %(message)s'
+        datefmt='%Y-%m-%d %H:%M:%S'
+
+    # Maintains a single file per day and 24 files before deleting oldest files first.
+    [loggers.rotating_file]
+        level = 'DEBUG'
+        format = '%(asctime)s - %(module)s - %(levelname)s - %(message)s'
+        datefmt='%Y-%m-%d %H:%M:%S'
+        when = 'm'
+        interval = 5
+        backupCount = 12
